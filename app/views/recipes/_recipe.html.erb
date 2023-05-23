@@ -1,4 +1,8 @@
 <div id="<%= dom_id recipe %>">
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+  </div>  
   <p>
     <strong>Name:</strong>
     <%= recipe.name %>
@@ -18,15 +22,4 @@
     <strong>Description:</strong>
     <%= recipe.description %>
   </p>
-
-  <p>
-    <strong>Public:</strong>
-    <%= recipe.public %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= recipe.user_id %>
-  </p>
-
 </div>
