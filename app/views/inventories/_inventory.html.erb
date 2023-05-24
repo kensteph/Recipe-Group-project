@@ -1,12 +1,10 @@
-<div id="<%= dom_id inventory %>">
-  <p>
-    <strong>Name:</strong>
-    <%= inventory.name %>
-  </p>
+<div class="d-flex flex-row mb-3">
+  <div class="d-flex flex-column flex-shrink-0" >
+  <%= link_to "#{inventory.name}", inventory, class:"fs-3 link-dark link-underline-light" %>
+  <%= link_to "Remove" %>
+  </div>
 
-  <p>
-    <strong>User:</strong>
-    <%= inventory.user_id %>
-  </p>
-
+  <div class="flex-shrink-1  ms-3">
+     <%= inventory.description %>
+  </div>
 </div>

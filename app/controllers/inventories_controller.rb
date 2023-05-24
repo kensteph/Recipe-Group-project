@@ -23,8 +23,7 @@ class InventoriesController < ApplicationController
     @inventory.user = current_user
     respond_to do |format|
       if @inventory.save
-        format.html { redirect_to inventories_url(@inventory), notice: 'Inventory was successfully created.' }
-        format.json { render :show, status: :created, location: @inventory }
+        format.html { redirect_to inventories_url, notice: 'Inventory was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @inventory.errors, status: :unprocessable_entity }
@@ -32,18 +31,6 @@ class InventoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /inventories/1 or /inventories/1.json
-  def update
-    respond_to do |format|
-      if @inventory.update(inventory_params)
-        format.html { redirect_to inventory_url(@inventory), notice: 'Inventory was successfully updated.' }
-        format.json { render :show, status: :ok, location: @inventory }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /inventories/1 or /inventories/1.json
   def destroy
