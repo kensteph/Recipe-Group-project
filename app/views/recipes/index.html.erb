@@ -3,12 +3,16 @@
 <h1>Recipes</h1>
 
 <div id="recipes">
-  <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
+<% if @recipes.present? %>
+  <% @recipes.each do |recipe| class:"border" %>
+      <%= link_to recipe do %>
+    <%= render partial: 'recipe_index', locals: { recipe: recipe } %>
+     <% end %>
+    <%= button_to "Destroy this recipe", recipe, method: :delete %>
   <% end %>
+<% else %>
+  <p>No recipes found.</p>
+<% end %>
 </div>
 
 <%= link_to "New recipe", new_recipe_path %>
