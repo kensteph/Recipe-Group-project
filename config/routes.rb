@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :inventories, only: [:index, :show, :new, :create, :destroy]
   resources :foods, only: [:new, :create, :destroy]
-  resources :recipes, only: [:new, :create, :destroy]
+  resources :recipes, only: [:index, :show, :new, :create, :destroy]
   resources :users, only: [:index, :show]
 
   # resources :recipe_foods, only: [:new, :create, :destroy]
@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "users#index"
+  root "recipes#index"
 end
