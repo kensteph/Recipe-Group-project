@@ -7,6 +7,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-first_user = User.create!(name: 'Tom')
-second_user = User.create!(name: 'Lilly')
+# first_user = User.create!(name: 'Tom')
+# second_user = User.create!(name: 'Lilly')
 #first_post = Post.create!(author: first_user, title: 'Hello', text: 'This is my first post')

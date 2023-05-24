@@ -4,7 +4,7 @@
 
 <div id="recipes">
 <% if @recipes.present? %>
-  <% @recipes.each do |recipe| %>
+  <% @recipes.each do |recipe| class:"border" %>
       <%= link_to recipe do %>
     <%= render partial: 'recipe_index', locals: { recipe: recipe } %>
      <% end %>
