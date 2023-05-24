@@ -1,10 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @recipe %>
-
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+</div>
 <div>
-  <%= button_to "Generate shopping list", edit_recipe_path(@recipe) %> |
-  <%= button_to "Add ingredient", recipes_path %> 
+  <%
+=begin%>
+ <%= button_to "Generate shopping list", edit_recipe_path(@recipe) %> |
+  <%= button_to "Add ingredient", recipes_path %>  
+<%
+=end%>
+  <button>Generate shopping list</button>
+  <button>Add ingredient</button>
 </div>
 <table class="table">
   <thead>
@@ -16,12 +25,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @recipe_foods.each |food| do%>
+    <% @recipe_foods.includes(:food).each do |item|%>
     <tr>
-      <td><%= food.name%></td>
-      <td><%= food.measurement_unit%></td>
-      <td><%= food.price%></td>
-      <td><%= button_to 'Remove', recipe_food_path(food.id), method: :destroy %></td>
+      <td><%= item.food.name%></td>
+      <td><%= item.quantity%> <%=item.food.measurement_unit%> </td>
+      <td><%= item.food.price%></td>
+      <td><%= button_to 'Remove', recipe_food_path(item.id), method: :destroy %></td>
     </tr>
     <% end %>
   </tbody>
