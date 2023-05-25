@@ -10,10 +10,10 @@ class RecipesController < ApplicationController
   def show
     @current_user = current_user
     @recipe_foods = RecipeFood.where(recipe_id: params[:id])
-    #@foods= []
-    #@recipe_foods.each do |item| 
+    # @foods= []
+    # @recipe_foods.each do |item|
     #  @foods << Food.find(item.food_id)
-    #end
+    # end
   end
 
   # GET /recipes/new
@@ -62,14 +62,14 @@ class RecipesController < ApplicationController
     end
   end
 
-  #To handle checkbox
+  # To handle checkbox
   def checkbox
     @current_user = current_user
     set_recipe
     @recipe.public = !@recipe.public
     @recipe.save
     respond_to do |format|
-      format.html { redirect_to request.referrer}
+      format.html { redirect_to request.referrer }
       format.json { head :no_content }
     end
   end
