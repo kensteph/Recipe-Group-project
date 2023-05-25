@@ -1,13 +1,13 @@
 <h1>Add ingredient</h1>
 
 <% if @available.length > 0 %>
-  <table class="table">
+  <table class="table mt-3">
     <thead>
       <tr>
-        <th>Name</th>      
-        <th>Measurement unit</th>
-        <th>Value</th>
-        <th>Quantity</th>
+        <th class="table-info">Name</th>      
+        <th class="table-info">Measurement unit</th>
+        <th class="table-info">Value</th>
+        <th class="table-info">Quantity</th>
       </tr>
     </thead>  
     <tbody>
@@ -21,7 +21,7 @@
             <%= form.number_field :quantity %>
             <%= form.hidden_field :recipe_id, value: @recipe.id %>
             <%= form.hidden_field :food_id, value: item.id %>
-            <%= form.submit 'Add Ingredient' %>
+            <%= form.submit 'Add Ingredient', class:'btn btn-success ms-2'%>
           <% end %>       
         </td>
           
@@ -29,9 +29,9 @@
       <% end %>
     </tbody>
   </table>
-    <%= button_to 'Add new food', new_food_path, method: :get, class:'btn-success' %>
+    <%= button_to 'Add new food', new_food_path, method: :get, class:'btn btn-success' %>
   <% else %>
-    <%= button_to 'Add new food', new_food_path, method: :get, class:'btn-success' %>
+    <%= button_to 'Add new food', new_food_path, method: :get, class:'btn btn-success' %>
   
 <% end %>
 
