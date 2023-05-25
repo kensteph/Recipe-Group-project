@@ -61,6 +61,18 @@ class RecipesController < ApplicationController
     end
   end
 
+  #To handle checkbox
+  def checkbox
+    @current_user = current_user
+    set_recipe
+    @recipe.public = !@recipe.public
+    @recipe.save
+    respond_to do |format|
+      format.html { redirect_to request.referrer}
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

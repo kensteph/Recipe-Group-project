@@ -1,10 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @recipe %>
+
+<%= form_tag checkbox_path, method: :put, id: 'my-form' do %>
 <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+  <%= check_box_tag 'public', '1', @recipe.public, class: 'form-check-input', id: 'flexSwitchCheckChecked' %>
+  <%= label_tag 'flexSwitchCheckChecked', 'Public', class: 'form-check-label' %>
 </div>
+<% end %>
+
 <div>
   <%
 =begin%>
@@ -30,7 +34,7 @@
       <td><%= item.food.name%></td>
       <td><%= item.quantity%> <%=item.food.measurement_unit%> </td>
       <td><%= item.food.price%></td>
-      <td><%= button_to 'Remove', recipe_food_path(item.id), method: :destroy %></td>
+      <td><%= button_to 'Remove', recipe_food_path(item.id), method: :delete %></td>
     </tr>
     <% end %>
   </tbody>
