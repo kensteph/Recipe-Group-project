@@ -11,32 +11,37 @@
     </div>
   <% end %>
 
-  <div class="mb-3">
-    <%= form.label :name, class:"form-label" %>
-    <%= form.text_field :name, autofocus: true, class:"form-control" %>
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
   </div>
 
-  <div class="mb-3">
+  <div>
     <%= form.label :preparation_time, style: "display: block" %>
-    <%= form.text_field :preparation_time, autofocus: true, autocomplete: "email", class:"form-control" %>
+    <%= form.text_field :preparation_time %>
   </div>
 
-  <div class="mb-3">
+  <div>
     <%= form.label :cooking_time, style: "display: block" %>
-    <%= form.text_field :cooking_time, autofocus: true, autocomplete: "email", class:"form-control" %>
+    <%= form.text_field :cooking_time %>
   </div>
 
-  <div class="mb-3">
+  <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description, autofocus: true, autocomplete: "email", class:"form-control" %>
+    <%= form.text_area :description %>
   </div>
 
-  <div class="mb-3">
+  <div>
     <%= form.label :public, style: "display: block" %>
     <%= form.check_box :public %>
   </div>
 
-  <div class="actions">
-    <%= form.submit "Create Recipe", class:"btn btn-primary mb-3"%>
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
   </div>
 <% end %>
