@@ -1,7 +1,7 @@
 <div class="container">
 <h1 class="text-center mb-3"><%=@inventory.name%></h1>
 <div class="d-flex flex-row justify-content-end p-2 border-bottom border-2 mb-3">
-<%= link_to "Add food", inventories_path, class:"btn btn-primary" %>
+<%= link_to "Add food", new_inventory_food_path(@inventory), class:"btn btn-primary" %>
 </div>
 <table class="table table-bordered mt-5">
   <thead>
@@ -12,11 +12,13 @@
     </tr>
   </thead>
    <tbody >
+   <% @inventory_food.each  do |data| %>
     <tr>
-      <td>Apple</td>
-      <td>10 grams</td>
-      <td><%= link_to "Remove", inventories_path, class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %></td>
+      <td><%= data.food.name%></td>
+      <td><%= "#{data.quantity} #{data.food.measurement_unit}" %></td>
+      <td><%= link_to "Remove", inventory_food_path(data.inventory_id,data.food_id), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %></td>
     </tr>
+  <% end %>
   </tbody>
 </table>
 <div>

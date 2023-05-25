@@ -12,6 +12,8 @@ class InventoryFoodsController < ApplicationController
   # GET /inventory_foods/new
   def new
     @inventory_food = InventoryFood.new
+    @inventory = Inventory.find(params[:inventory_id])
+    @food = Food.find(params[:food_id])
   end
 
   # GET /inventory_foods/1/edit
@@ -19,12 +21,12 @@ class InventoryFoodsController < ApplicationController
 
   # POST /inventory_foods or /inventory_foods.json
   def create
-    @inventory_food = InventoryFood.new(inventory_food_params)
+    @inventory_food = InventoryFood.where(inventory_id: params[:inventory_id])
 
     respond_to do |format|
-      if @inventory_food.save
+      if @inventory_food.update(inventory_food_params)
         format.html do
-          redirect_to inventory_food_url(@inventory_food), notice: 'Inventory food was successfully created.'
+          redirect_to inventory_path(params[:inventory_id]), notice: 'Food was  successfully added to .'
         end
         format.json { render :show, status: :created, location: @inventory_food }
       else
@@ -68,6 +70,6 @@ class InventoryFoodsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def inventory_food_params
-    params.require(:inventory_food).permit(:quantity, :inventory_id, :food_id)
+    params.require(:inventory_food).permit(:quantity)
   end
 end

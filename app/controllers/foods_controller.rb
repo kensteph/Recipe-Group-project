@@ -11,6 +11,7 @@ class FoodsController < ApplicationController
 
   # GET /foods/new
   def new
+    @inventory = Inventory.find(params[:inventory_id])
     @food = Food.new
   end
 
@@ -19,39 +20,33 @@ class FoodsController < ApplicationController
 
   # POST /foods or /foods.json
   def create
+    @inventory = Inventory.find(params[:inventory_id])
     @food = Food.new(food_params)
+    @inventory_food=InventoryFood.new
+    @inventory_food.food = @food
+    @inventory_food.inventory = @inventory
+    @inventory_food.quantity = params[:quantity]
 
     respond_to do |format|
       if @food.save
-        format.html { redirect_to food_url(@food), notice: 'Food was successfully created.' }
-        format.json { render :show, status: :created, location: @food }
+        if @inventory_food.save
+          format.html { redirect_to new_inventory_food_inventory_food_path(@inventory,@food), notice: 'Food was successfully created.' }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @food.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /foods/1 or /foods/1.json
-  def update
-    respond_to do |format|
-      if @food.update(food_params)
-        format.html { redirect_to food_url(@food), notice: 'Food was successfully updated.' }
-        format.json { render :show, status: :ok, location: @food }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @food.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /foods/1 or /foods/1.json
   def destroy
+    @food = Food.find(params[:id])
     @food.destroy
-
+    
     respond_to do |format|
-      format.html { redirect_to foods_url, notice: 'Food was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to inventory_path(params[:inventory_id]), notice: 'Food was successfully destroyed.' }
     end
   end
 
