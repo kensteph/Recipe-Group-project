@@ -1,10 +1,25 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @inventory %>
-
+<div class="container">
+<h1 class="text-center mb-3"><%=@inventory.name%></h1>
+<div class="d-flex flex-row justify-content-end p-2 border-bottom border-2 mb-3">
+<%= link_to "Add food", inventories_path, class:"btn btn-primary" %>
+</div>
+<table class="table table-bordered mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+   <tbody >
+    <tr>
+      <td>Apple</td>
+      <td>10 grams</td>
+      <td><%= link_to "Remove", inventories_path, class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %></td>
+    </tr>
+  </tbody>
+</table>
 <div>
-  <%= link_to "Edit this inventory", edit_inventory_path(@inventory) %> |
-  <%= link_to "Back to inventories", inventories_path %>
-
-  <%= button_to "Destroy this inventory", @inventory, method: :delete %>
+<%= link_to "Back to inventories", inventories_path, class:"btn btn-primary" %>
+</div>
 </div>
