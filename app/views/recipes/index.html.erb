@@ -5,14 +5,20 @@
 <div id="recipes">
 <% if @recipes.present? %>
   <% @recipes.each do |recipe| %>
-      <%= link_to recipe do %>
-    <%= render partial: 'recipe_index', locals: { recipe: recipe } %>
-     <% end %>
-    <%= button_to "Destroy this recipe", recipe, method: :delete %>
+    <div class="d-flex flex-row border border-primary mb-3 p-2">
+    <div class="d-flex flex-column flex-shrink-0 me-5 ms-2" >
+    <%= link_to "#{recipe.name}", recipe, class:"fs-3 link-dark link-underline-light" %>
+    <%= link_to 'Remove', recipe_path(recipe), 'data-turbo-method': :delete, data: { confirm: "Are you sure?"} %>
+    </div>
+  
+    <div class="flex-shrink-1  ms-3">
+       <%= recipe.description %>
+    </div>
+  </div>
   <% end %>
 <% else %>
   <p>No recipes found.</p>
 <% end %>
 </div>
 
-<%= link_to "New recipe", new_recipe_path %>
+<%= link_to "New recipe", new_recipe_path, class:"btn btn-primary" %>
