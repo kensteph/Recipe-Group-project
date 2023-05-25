@@ -17,6 +17,14 @@ class FoodsController < ApplicationController
   # GET /foods/1/edit
   def edit; end
 
+  # GET /food/recipe/:recipe_id
+  def new_ingredient
+    @current_user = current_user
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe_foods = RecipeFood.where(recipe_id: params[:recipe_id])
+    @available = Food.where.not(id: @recipe_foods.pluck(:food_id))
+  end
+
   # POST /foods or /foods.json
   def create
     @food = Food.new(food_params)
