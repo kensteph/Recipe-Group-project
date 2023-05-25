@@ -1,14 +1,18 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Inventories BB</h1>
-
+<div class="container align-items-center">
+<% if user_signed_in? %>
+<h1  class="text-center">Inventories</h1>
+</div>
+<% if user_signed_in? %>
+<%= link_to "New inventory", new_inventory_path, class:"btn btn-primary mb-3 mt-3" %>
+<% end%>
 <div id="inventories">
   <% @inventories.each do |inventory| %>
     <%= render inventory %>
-    <p>
-      <%= link_to "Show this inventory", inventory %>
-    </p>
   <% end %>
+<% else %>
+<div class="alert alert-danger" role="alert">
+    You have to sign in to display the inventories.
+    <%= link_to "Sign In", new_user_session_path , class: "fs-4 text-decoration-none"%>
+  </div>
+ <% end %>
 </div>
-
-<%= link_to "New inventory", new_inventory_path %>
