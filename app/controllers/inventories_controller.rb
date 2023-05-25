@@ -33,7 +33,6 @@ class InventoriesController < ApplicationController
     end
   end
 
-
   # DELETE /inventories/1 or /inventories/1.json
   def destroy
     @inventory.destroy

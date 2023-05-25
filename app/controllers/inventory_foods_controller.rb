@@ -21,8 +21,7 @@ class InventoryFoodsController < ApplicationController
 
   # POST /inventory_foods or /inventory_foods.json
   def create
-    @inventory_food = InventoryFood.where(inventory_id: params[:inventory_id])
-
+    @inventory_food = InventoryFood.where(inventory_id: params[:inventory_id], food_id: params[:food_id])
     respond_to do |format|
       if @inventory_food.update(inventory_food_params)
         format.html do

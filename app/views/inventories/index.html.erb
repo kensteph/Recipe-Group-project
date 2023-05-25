@@ -1,4 +1,5 @@
 <div class="container align-items-center">
+<% if user_signed_in? %>
 <h1  class="text-center">Inventories</h1>
 </div>
 <% if user_signed_in? %>
@@ -8,4 +9,10 @@
   <% @inventories.each do |inventory| %>
     <%= render inventory %>
   <% end %>
+<% else %>
+<div class="alert alert-danger" role="alert">
+    You have to sign in to display the inventories.
+    <%= link_to "Sign In", new_user_session_path , class: "fs-4 text-decoration-none"%>
+  </div>
+ <% end %>
 </div>
