@@ -1,0 +1,5 @@
+<div>
+    <% @recipes.includes(:user).each do |username|%>
+  <%= username.user.name%>
+    <% end %>
+    </div>
