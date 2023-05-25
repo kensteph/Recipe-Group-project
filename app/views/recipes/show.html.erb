@@ -19,23 +19,6 @@
   <button>Generate shopping list</button>
   <button>Add ingredient</button>
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Food</th>
-      <th>Quantity</th>
-      <th>Value</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @recipe_foods.includes(:food).each do |item|%>
-    <tr>
-      <td><%= item.food.name%></td>
-      <td><%= item.quantity%> <%=item.food.measurement_unit%> </td>
-      <td><%= item.food.price%></td>
-      <td><%= button_to 'Remove', recipe_food_path(item.id), method: :delete %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @recipe.public || @current_user.id==@recipe.user_id %>
+<%= render 'ingredients' %>
+<% end %>

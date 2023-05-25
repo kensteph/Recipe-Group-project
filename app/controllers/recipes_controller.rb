@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    @current_user = current_user
     @recipe_foods = RecipeFood.where(recipe_id: params[:id])
     #@foods= []
     #@recipe_foods.each do |item| 
