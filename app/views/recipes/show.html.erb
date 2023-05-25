@@ -17,7 +17,10 @@
 <%
 =end%>
   <button>Generate shopping list</button>
-  <button>Add ingredient</button>
+  <%if @current_user.id==@recipe.user_id%>
+    <%= button_to 'Add ingredient', add_ingredient_path(@recipe.id), method: :get %>
+  <% end %>
+
 </div>
 <% if @recipe.public || @current_user.id==@recipe.user_id %>
 <%= render 'ingredients' %>

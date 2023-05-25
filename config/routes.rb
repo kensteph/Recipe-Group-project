@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   resources :shopping_list, only: [:index]
 
   #To remove ingredients
-  resources :recipe_foods, only:[:destroy]
+  resources :recipe_foods, only:[:create, :destroy]
   #To handle switch checkbox
   put '/recipes/:id/put', to: 'recipes#checkbox', as: 'checkbox'
-  
+  #To add ingredients to the recipe
+  get '/food/recipe/:recipe_id', to:'foods#new_ingredient', as: 'add_ingredient'
   
   # resources :recipe_foods, only: [:new, :create, :destroy]
   # resources :users, only: [:index, :show] do

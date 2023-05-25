@@ -1,0 +1,38 @@
+<h1>Add ingredient</h1>
+
+<% if @available.length > 0 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>      
+        <th>Measurement unit</th>
+        <th>Value</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>  
+    <tbody>
+      <% @available.each do |item|%>
+      <tr>
+        <td><%= item.name%></td>
+        <td><%=item.measurement_unit%> </td>      
+        <td><%= item.price%></td>
+        <td>
+          <%= form_with(model: RecipeFood.new) do |form| %>
+            <%= form.number_field :quantity %>
+            <%= form.hidden_field :recipe_id, value: @recipe.id %>
+            <%= form.hidden_field :food_id, value: item.id %>
+            <%= form.submit 'Add Ingredient' %>
+          <% end %>       
+        </td>
+          
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+    <%= button_to 'Add new food', new_food_path, method: :get, class:'btn-success' %>
+  <% else %>
+    <%= button_to 'Add new food', new_food_path, method: :get, class:'btn-success' %>
+  
+<% end %>
+
+
