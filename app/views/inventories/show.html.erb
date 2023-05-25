@@ -68,7 +68,7 @@
       <td><%= "#{data.quantity} #{data.food.measurement_unit}" %></td>
       <td>
       <% if user_signed_in? %>
-        <%= link_to "Remove", "/", class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
+        <%= link_to "Remove", inventory_food_path(inventory_id: @inventory.id,id:data.id), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
       <% end%>
       
       </td>

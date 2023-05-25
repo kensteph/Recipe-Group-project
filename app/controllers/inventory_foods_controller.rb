@@ -1,8 +1,6 @@
 class InventoryFoodsController < ApplicationController
 
-  # POST /inventory_foods or /inventory_foods.json
   def create
-    puts "PARAMS : #{params}"
     @inventory_food = InventoryFood.new(inventory_id: params[:inventory_id], food_id: params[:food_id],quantity: params[:quantity])
     respond_to do |format|
       if @inventory_food.save
@@ -12,6 +10,15 @@ class InventoryFoodsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @inventory_food = InventoryFood.find_by(id: params[:id])
+      @inventory_food.destroy
+      respond_to do |format|
+        format.html { redirect_to inventory_url(params[:inventory_id]), notice: 'Food was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    end
   
   private
 
