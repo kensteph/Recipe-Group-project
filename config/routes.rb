@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   put '/recipes/:id/put', to: 'recipes#checkbox', as: 'checkbox'
   #To add ingredients to the recipe
   get '/food/recipe/:recipe_id', to:'foods#new_ingredient', as: 'add_ingredient'
-  
+  # Modal path
+  get '/shopping_list/:recipe_id/inventory/:inventory_id', to: 'recipes#modal', as: 'shopping_list' 
   # resources :recipe_foods, only: [:new, :create, :destroy]
   # resources :users, only: [:index, :show] do
   #   resources :inventories, controller: 'users/inventories' do

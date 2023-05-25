@@ -8,6 +8,8 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    @inventories = Inventory.all
+    @inventories_names = @inventories.pluck(:name)
     @current_user = current_user
     @recipe_foods = RecipeFood.where(recipe_id: params[:id])
     # @foods= []
@@ -73,6 +75,15 @@ class RecipesController < ApplicationController
       format.html { redirect_to request.referrer }
       format.json { head :no_content }
     end
+  end
+
+  def modal
+    @inventory = Inventory.find(params[:invent_id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @inventory_foods = InventoryFood.where(inventory_id: params[:invent_id])
+    @recipe_foods = RecipeFood.where(recipe_id: params[:recipe_id])
+    @inventory_foods_ids = @inventory_foods.pluck(:food_id)
+    
   end
 
   private
