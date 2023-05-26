@@ -83,6 +83,21 @@ class RecipesController < ApplicationController
     @inventory_foods = InventoryFood.where(inventory_id: params[:invent_id])
     @recipe_foods = RecipeFood.where(recipe_id: params[:recipe_id])
     @inventory_foods_ids = @inventory_foods.pluck(:food_id)
+    @amount = 0
+    @total_price = 0
+    @recipe_foods.includes(:food).each do |item|
+      if !@inventory_foods_ids.include?(item.food_id)
+        @total_price += item.food.price * item.quantity
+        @amount += 1
+      else
+        @inventory_foods.includes(:food).each do |inventory|
+          if item.food_id == inventory.food_id && item.quantity < inventory.quantity
+            @total_price += item.food.price * (inventory.quantity - item.quantity)
+            amount += 1
+          end
+        end
+      end
+    end
     
   end
 

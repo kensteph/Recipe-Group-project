@@ -12,13 +12,7 @@
 
 <div>
 
-  <%
-=begin%>
- <%= button_to "Generate shopping list", edit_recipe_path(@recipe) %> |
-  <%= button_to "Add ingredient", recipes_path %>  
-<%
-=end%>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  <button type="button" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#myModal">
   Generate shopping list
 </button>
 <div class="modal" id="myModal">
