@@ -75,7 +75,7 @@ RSpec.describe 'Inventories', type: :request do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     end
 
-    it 'renders index template' do
+    it 'renders show template' do
       get "/inventories/#{inventory.id}"
       expect(response).to render_template(:show)
     end
