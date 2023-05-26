@@ -8,6 +8,8 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    @inventories = Inventory.all
+    @inventories_names = @inventories.pluck(:name)
     @current_user = current_user
     @recipe_foods = RecipeFood.where(recipe_id: params[:id])
     # @foods= []
@@ -72,6 +74,29 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to request.referrer }
       format.json { head :no_content }
+    end
+  end
+
+  def shopping
+    @inventory = Inventory.find(params[:invent_id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @inventory_foods = InventoryFood.where(inventory_id: params[:invent_id])
+    @recipe_foods = RecipeFood.where(recipe_id: params[:recipe_id])
+    @inventory_foods_ids = @inventory_foods.pluck(:food_id)
+    @amount = 0
+    @total_price = 0
+    @recipe_foods.includes(:food).each do |item|
+      if @inventory_foods_ids.include?(item.food_id)
+        @inventory_foods.includes(:food).each do |inventory|
+          if item.food_id == inventory.food_id && item.quantity > inventory.quantity
+            @total_price += item.food.price * (item.quantity - inventory.quantity)
+            @amount += 1
+          end
+        end
+      else
+        @total_price += item.food.price * item.quantity
+        @amount += 1
+      end
     end
   end
 

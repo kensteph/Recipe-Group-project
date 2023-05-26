@@ -1,29 +1,55 @@
 <p style="color: green"><%= notice %></p>
-
+<%= button_to 'Back', recipes_path, method: :get, class: 'btn btn-warning m-2' %>
 <%= render @recipe %>
 
 <%= form_tag checkbox_path, method: :put, id: 'my-form' do %>
-<div class="form-check form-switch">
+<div class="form-check form-switch m-2">
   <%= check_box_tag 'public', '1', @recipe.public, class: 'form-check-input', id: 'flexSwitchCheckChecked' %>
   <%= label_tag 'flexSwitchCheckChecked', 'Public', class: 'form-check-label' %>
+  
 </div>
 <% end %>
 
 <div>
 
-  <%
-=begin%>
- <%= button_to "Generate shopping list", edit_recipe_path(@recipe) %> |
-  <%= button_to "Add ingredient", recipes_path %>  
-<%
-=end%>
-  <button>Generate shopping list</button>
-  <%if @current_user.id==@recipe.user_id%>
+  <button type="button" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#myModal">
+  Generate shopping list
+</button>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Shopping List</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <%= form_tag shopping_list_path(recipe_id: @recipe.id, inventory_id: :invent_id), method: :get, id: 'modal-form' do %>
+          <%= label_tag :invent_id, 'Inventories' %>
+          <%= select_tag :invent_id, options_for_select(@inventories.map { |inventory| [inventory.name, inventory.id] }), class: 'form-select' %>
+          <%= submit_tag 'Generate', class: 'btn btn-success mt-3' %>
+        <% end %>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+  <%if @current_user==@recipe.user%>
     <%= button_to 'Add ingredient', add_ingredient_path(@recipe.id), method: :get, class: 'btn btn-success m-2' %>
   <% end %>
 
 
 </div>
-<% if @recipe.public || @current_user.id==@recipe.user_id %>
+<% if @recipe.public || @current_user==@recipe.user %>
 <%= render 'ingredients' %>
 <% end %>
+
