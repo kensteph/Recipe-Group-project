@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :foods, only: [:new, :create, :destroy]
   resources :recipes, only: [:index, :show, :new, :create, :destroy]
   resources :users, only: [:index, :show]
-  resources :public_recipe, only: [:index]
-  resources :shopping_list, only: [:index]
+  resources :public_recipes, only: [:index]
+  resources :shopping_lists, only: [:index]
 
   #To remove ingredients
   resources :recipe_foods, only:[:create, :destroy]

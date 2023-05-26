@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Public Recipes</h1>
+
+<div id="recipes">
+<% if @recipes.present? %>
+  <% @recipes.each do |recipe| %>
+    <div class="d-flex flex-row  border border-primary mb-3 p-2">
+    <div class="d-flex flex-column flex-shrink-0 me-5 ms-2" >
+    <%= link_to "#{recipe.name}", recipe, class:"fs-4 link-dark link-underline-light" %>
+  <%= "by: #{recipe.user.id}" %>
+  </div>
+  <% total_price = 0 %>
+  <% food_count = recipe.recipe_foods.count %>
+      <% recipe.recipe_foods.pluck(:food_id).each do |food_id| %>
+        <% food = Food.find_by(id: food_id) %>
+        <% next unless food %>
+  <% total_price += food.price if food %>
+      <% end %>
+    <div class="d-flex flex-column">
+  Total food items: <%= food_count %><br>
+ Total price: <%= total_price %>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <p>No recipes found.</p>
+<% end %>
+</div>
+
+<%= link_to "New recipe", new_recipe_path, class:"btn btn-primary" %>

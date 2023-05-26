@@ -8,7 +8,7 @@
     <div class="d-flex flex-row border border-primary mb-3 p-2">
     <div class="d-flex flex-column flex-shrink-0 me-5 ms-2" >
     <%= link_to "#{recipe.name}", recipe, class:"fs-3 link-dark link-underline-light" %>
-    <%= link_to 'Remove', recipe_path(recipe), 'data-turbo-method': :delete, data: { confirm: "Are you sure?"} %>
+    <%= link_to 'Remove', recipe_path(recipe), 'data-turbo-method': :delete, data: { confirm: "Are you sure?"}, class:"btn btn-danger" %>
     </div>
   
     <div class="flex-shrink-1  ms-3">
