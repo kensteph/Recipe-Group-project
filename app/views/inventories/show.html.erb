@@ -1,10 +1,91 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+<h1 class="text-center mb-3"><%=@inventory.name%></h1>
+<% if can? :destroy , @inventory %>
+  <% justify= " justify-content-between" %>
+<% else %>
+  <% justify= " justify-content-end" %>
+<% end %>
+<div class="d-flex flex-row <%= justify %> p-2 border-bottom border-2 mb-3">
+<% if can? :destroy, @inventory %>
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">
+  Add food to inventory
+</button>
+<% end %>
 
-<%= render @inventory %>
+<%= link_to "Add food", new_food_path(@inventory), class:"btn btn-primary" %>
+</div>
 
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add food to inventory</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+      <form method="POST" action="/inventory_foods">
+  <div class="mb-3">
+  <input type="hidden" name="inventory_id" value="<%=@inventory.id%>">
+    <label for="exampleInputFood1" class="form-label">Food</label>
+    <select class="form-select" name="food_id" >
+              <% @foods.each do |food| %>
+                <option value="<%=food.id%>"><%=food.name%></option>
+              <% end %>
+            </select>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputQuantity1" class="form-label">Quantity</label>
+    <input type="number" name="quantity" value="1" min="1" class="form-control" >
+  </div>
+  <button type="submit"  class="btn btn-primary">Submit</button>
+</form>
+
+
+  
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- The inventory table -->
+<table class="table table-bordered mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <% if can? :destroy, @inventory %>
+        <th scope="col">Actions</th>
+      <% end %>
+    </tr>
+  </thead>
+   <tbody >
+  <% @inventory_food.each  do |data| %>
+    <tr>
+      <td><%= data.food.name%></td>
+      <td><%= "#{data.quantity} #{data.food.measurement_unit}" %></td>
+      <% if can? :destroy, @inventory %>
+        <td>
+          <%= link_to "Remove", inventory_food_path(inventory_id: @inventory.id,id:data.id), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
+        </td>
+      <% end%>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 <div>
-  <%= link_to "Edit this inventory", edit_inventory_path(@inventory) %> |
-  <%= link_to "Back to inventories", inventories_path %>
-
-  <%= button_to "Destroy this inventory", @inventory, method: :delete %>
+<%= link_to "Back to inventories", inventories_path, class:"btn btn-primary" %>
+</div>
 </div>
