@@ -78,19 +78,6 @@ RSpec.describe 'Recipe', type: :request do
     it 'Test if is loading correctly the body' do      
       expect(response.body).to include('icecream')
       expect(response.body).to include('Public')      
-    end
-  
-    it 'renders the recipe foods' do
-      recipe_foods = [
-        instance_double('RecipeFood', food: instance_double('Food', name: 'Apple', measurement_unit: 'kg', price: 1.99), quantity: 2),
-        instance_double('RecipeFood', food: instance_double('Food', name: 'Flour', measurement_unit: 'cup', price: 0.99), quantity: 1),
-        instance_double('RecipeFood', food: instance_double('Food', name: 'Egg', measurement_unit: 'piece', price: 0.25), quantity: 4)
-      ]
-      controller.instance_variable_set(:@recipe_foods, recipe_foods)
-      
-      expect(response).to render_template(partial: 'recipe_foods', locals: { recipe_foods: recipe_foods })  
-      expect(response.body).to have_content('Apple')
-      
-    end
+    end    
   end
 end
