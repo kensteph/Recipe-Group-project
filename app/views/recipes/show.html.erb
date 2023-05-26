@@ -1,9 +1,9 @@
 <p style="color: green"><%= notice %></p>
-
+<%= button_to 'Back', recipes_path, method: :get, class: 'btn btn-warning m-2' %>
 <%= render @recipe %>
 
 <%= form_tag checkbox_path, method: :put, id: 'my-form' do %>
-<div class="form-check form-switch">
+<div class="form-check form-switch m-2">
   <%= check_box_tag 'public', '1', @recipe.public, class: 'form-check-input', id: 'flexSwitchCheckChecked' %>
   <%= label_tag 'flexSwitchCheckChecked', 'Public', class: 'form-check-label' %>
   
@@ -30,7 +30,7 @@
         <%= form_tag shopping_list_path(recipe_id: @recipe.id, inventory_id: :invent_id), method: :get, id: 'modal-form' do %>
           <%= label_tag :invent_id, 'Inventories' %>
           <%= select_tag :invent_id, options_for_select(@inventories.map { |inventory| [inventory.name, inventory.id] }), class: 'form-select' %>
-          <%= submit_tag 'Generate' %>
+          <%= submit_tag 'Generate', class: 'btn btn-success mt-3' %>
         <% end %>
         
       </div>
@@ -52,3 +52,4 @@
 <% if @recipe.public || @current_user.id==@recipe.user_id %>
 <%= render 'ingredients' %>
 <% end %>
+
