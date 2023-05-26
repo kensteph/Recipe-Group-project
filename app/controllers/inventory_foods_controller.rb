@@ -1,6 +1,4 @@
 class InventoryFoodsController < ApplicationController
-  load_and_authorize_resource
-
   def create
     @inventory_food = InventoryFood.new(inventory_id: params[:inventory_id], food_id: params[:food_id],
                                         quantity: params[:quantity])
