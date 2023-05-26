@@ -84,20 +84,19 @@ RSpec.describe 'Shopping list', type: :system do
         i_f_7.save
         
       end
-    it 'renders show template' do
+    it 'Should display correctly the title: Shopping List' do
       visit "/shopping_list/#{recipe1.id}/inventory/invent_id?invent_id=#{inventory1.id}&commit=Generate"
       expect(page).to have_content('Shopping List')
     end
 
-    # it 'renders a successful response' do
-    #   visit "/shopping_list/#{recipe1.id}/inventory/invent_id?invent_id=#{inventory1.id}&commit=Generate"
-    #   expect(response).to be_successful
-    # end
+    it "Should render the recipe's name" do
+      visit "/shopping_list/#{recipe1.id}/inventory/invent_id?invent_id=#{inventory1.id}&commit=Generate"
+      expect(page).to have_content(recipe1.name)
+    end
 
-    # it 'Test if is loading correctly the body' do
-    #   visit "/shopping_list/#{recipe1.id}/inventory/invent_id?invent_id=#{inventory1.id}&commit=Generate"
-    #   expect(response.body).to include('Total value of food needed:')
-    # end
-  end
-  
+    it "Should render the inventory's name" do
+      visit "/shopping_list/#{recipe1.id}/inventory/invent_id?invent_id=#{inventory1.id}&commit=Generate"
+      expect(page).to have_content(inventory1.name)
+    end
+  end  
 end
