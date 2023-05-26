@@ -19,7 +19,7 @@
         <td><%= item.price%></td>
         <td>
           <%= form_with(model: RecipeFood.new) do |form| %>
-            <%= form.number_field :quantity %>
+            <%= form.number_field :quantity, min: 1 %>
             <%= form.hidden_field :recipe_id, value: @recipe.id %>
             <%= form.hidden_field :food_id, value: item.id %>
             <%= form.submit 'Add Ingredient', class:'btn btn-success ms-2'%>

@@ -48,14 +48,14 @@
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://rails.org/">React.js</a></li>
+    <li><a href="https://www.w3schools.com/html/">HTML & Bootstrap</a></li>
   </ul>
 </details>
 
 <details>
   <summary>Server</summary>
   <ul>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
+    <li><a href="https://guides.rubyonrails.org/">Rails</a></li>
   </ul>
 </details>
 
@@ -70,9 +70,9 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **[Like]**
-- **[Post]**
-- **[Comment]**
+- **[Add food]**
+- **[Add recipe]**
+- **[Generate shopping list]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -128,7 +128,7 @@ To run tests, run the following command:
 
 
 ```sh
-  Rspec
+  rspec
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -161,9 +161,9 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>.
 
-- [ ] **[Real time data]**
-- [ ] **[edited mood]**
-- [ ] **[star post]**
+- [ ] **[Share recipes]**
+- [ ] **[Like recipes]**
+- [ ] **[Add images for the recipes]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

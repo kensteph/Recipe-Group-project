@@ -16,7 +16,6 @@ class InventoryFoodsController < ApplicationController
     @inventory_food.destroy
     respond_to do |format|
       format.html { redirect_to inventory_url(params[:inventory_id]), notice: 'Food was successfully removed.' }
-      format.json { head :no_content }
     end
   end
 

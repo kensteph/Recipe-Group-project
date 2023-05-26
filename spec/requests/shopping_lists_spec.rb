@@ -70,7 +70,6 @@ RSpec.describe 'Shopping list', type: :request do
     end
 
     before(:each) do
-      # get shopping_list_path(recipe_id: recipe1.id, inventory_id: inventory1.id)
       tom.save
       food1.save
       food2.save
