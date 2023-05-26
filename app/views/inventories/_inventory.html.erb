@@ -1,8 +1,8 @@
 <div class="d-flex flex-row mb-3 border border-2 p-2" title="See <%=inventory.name%> details">
   <div class="d-flex flex-column flex-shrink-0" >
   <%= link_to "#{inventory.name}", inventory, class:"fs-3 link-dark text-decoration-none" %>
-  <% if user_signed_in? %>
-  <%= link_to 'Remove', inventory_path(inventory),class:"btn btn-danger btn-sm", 'data-turbo-method': :delete%>
+  <% if can? :destroy, inventory %>
+    <%= link_to 'Remove', inventory_path(inventory),class:"btn btn-danger btn-sm", 'data-turbo-method': :delete%>
   <% end %>
   </div>
 

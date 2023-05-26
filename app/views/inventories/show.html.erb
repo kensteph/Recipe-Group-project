@@ -1,11 +1,19 @@
 <div class="container">
 <h1 class="text-center mb-3"><%=@inventory.name%></h1>
-<div class="d-flex flex-row justify-content-between p-2 border-bottom border-2 mb-3">
-<%= link_to "Add food", new_food_path(@inventory), class:"btn btn-primary" %>
+<% if can? :destroy , @inventory %>
+  <% justify= " justify-content-between" %>
+<% else %>
+  <% justify= " justify-content-end" %>
+<% end %>
+<div class="d-flex flex-row <%= justify %> p-2 border-bottom border-2 mb-3">
+<% if can? :destroy, @inventory %>
 <!-- Button to Open the Modal -->
 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">
   Add food to inventory
 </button>
+<% end %>
+
+<%= link_to "Add food", new_food_path(@inventory), class:"btn btn-primary" %>
 </div>
 
 <!-- The Modal -->
@@ -58,7 +66,9 @@
     <tr>
       <th scope="col">Food</th>
       <th scope="col">Quantity</th>
-      <th scope="col">Actions</th>
+      <% if can? :destroy, @inventory %>
+        <th scope="col">Actions</th>
+      <% end %>
     </tr>
   </thead>
    <tbody >
@@ -66,12 +76,11 @@
     <tr>
       <td><%= data.food.name%></td>
       <td><%= "#{data.quantity} #{data.food.measurement_unit}" %></td>
-      <td>
-      <% if user_signed_in? %>
-        <%= link_to "Remove", inventory_food_path(inventory_id: @inventory.id,id:data.id), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
+      <% if can? :destroy, @inventory %>
+        <td>
+          <%= link_to "Remove", inventory_food_path(inventory_id: @inventory.id,id:data.id), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
+        </td>
       <% end%>
-      
-      </td>
     </tr>
   <% end %>
   </tbody>

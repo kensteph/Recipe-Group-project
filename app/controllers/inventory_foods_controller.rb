@@ -15,7 +15,7 @@ class InventoryFoodsController < ApplicationController
     @inventory_food = InventoryFood.find_by(id: params[:id])
     @inventory_food.destroy
     respond_to do |format|
-      format.html { redirect_to inventory_url(params[:inventory_id]), notice: 'Food was successfully destroyed.' }
+      format.html { redirect_to inventory_url(params[:inventory_id]), notice: 'Food was successfully removed.' }
       format.json { head :no_content }
     end
   end
