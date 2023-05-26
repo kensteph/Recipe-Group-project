@@ -1,9 +1,10 @@
 class RecipesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_recipe, only: %i[show edit update destroy]
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.order(created_at: :desc)
   end
 
   # GET /recipes/1 or /recipes/1.json
