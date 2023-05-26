@@ -43,13 +43,13 @@
     </div>
   </div>
 </div>
-  <%if @current_user.id==@recipe.user_id%>
+  <%if @current_user==@recipe.user%>
     <%= button_to 'Add ingredient', add_ingredient_path(@recipe.id), method: :get, class: 'btn btn-success m-2' %>
   <% end %>
 
 
 </div>
-<% if @recipe.public || @current_user.id==@recipe.user_id %>
+<% if @recipe.public || @current_user==@recipe.user %>
 <%= render 'ingredients' %>
 <% end %>
 
