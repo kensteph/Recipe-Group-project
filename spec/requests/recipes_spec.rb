@@ -16,7 +16,7 @@ RSpec.describe 'Recipe', type: :request do
         cooking_time: 4,
         description: 'ice cream made easy',
         public: true,
-        user: user
+        user:
       )
     end
     before(:each) do
