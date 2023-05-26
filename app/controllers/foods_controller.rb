@@ -11,7 +11,6 @@ class FoodsController < ApplicationController
     @food = Food.new
   end
 
-
   # GET /food/recipe/:recipe_id
   def new_ingredient
     @current_user = current_user
