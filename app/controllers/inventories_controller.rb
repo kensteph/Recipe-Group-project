@@ -10,7 +10,6 @@ class InventoriesController < ApplicationController
   def show
     @foods = Food.all
     @inventory_food = InventoryFood.includes(:food).where(inventory_id: params[:id])
-
   end
 
   # GET /inventories/new
