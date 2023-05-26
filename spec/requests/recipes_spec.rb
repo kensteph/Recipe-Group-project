@@ -18,7 +18,7 @@ RSpec.describe 'Recipe', type: :request do
       user_id: user.id
     )
   end
-  describe 'GET /index' do    
+  describe 'GET /index' do
     before(:each) do
       get recipes_path(user_id: user.id)
       recipe.save
@@ -49,13 +49,13 @@ RSpec.describe 'Recipe', type: :request do
   end
 
   describe 'GET /show' do
-    let(:food1) do 
+    let(:food1) do
       Food.create(name: 'Apple', measurement_unit: 'kg', price: 2.5)
     end
-    let(:food2) do 
+    let(:food2) do
       Food.create(name: 'Flour', measurement_unit: 'kg', price: 1.2)
     end
-    let (:food3) do 
+    let(:food3) do
       Food.create(name: 'Egg', measurement_unit: 'units', price: 0.8)
     end
     let(:r_foods1) { RecipeFood.create(quantity: 1, recipe_id: recipe.id, food_id: food1.id) }
@@ -65,17 +65,17 @@ RSpec.describe 'Recipe', type: :request do
       get recipe_path(id: recipe.id)
       recipe.save
     end
-    it 'renders show template' do      
+    it 'renders show template' do
       expect(response).to render_template(:show)
     end
 
-    it 'renders a successful response' do      
+    it 'renders a successful response' do
       expect(response).to be_successful
     end
 
-    it 'Test if is loading correctly the body' do      
+    it 'Test if is loading correctly the body' do
       expect(response.body).to include('icecream')
-      expect(response.body).to include('Public')      
-    end    
+      expect(response.body).to include('Public')
+    end
   end
 end

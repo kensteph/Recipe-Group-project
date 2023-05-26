@@ -18,7 +18,7 @@ RSpec.describe 'Recipe', type: :system do
         user:
       )
     end
-    before(:each) do      
+    before(:each) do
       recipe.save
       user.save
     end
@@ -26,16 +26,16 @@ RSpec.describe 'Recipe', type: :system do
       visit '/recipes'
       expect(page).to have_content(recipe.name)
     end
-    
+
     it "Should render the recipe's description." do
       visit '/recipes'
       expect(page).to have_content(recipe.description)
     end
 
-    it "Should render the new recipe button." do
+    it 'Should render the new recipe button.' do
       visit '/recipes'
-      expect(page).to have_content("New recipe")
-    end    
+      expect(page).to have_content('New recipe')
+    end
   end
   describe 'GET /show' do
     let(:user) do
@@ -61,7 +61,7 @@ RSpec.describe 'Recipe', type: :system do
     let(:food2) do
       Food.create!(name: 'Flour', measurement_unit: 'kg', price: 1.2)
     end
-    let (:food3) do
+    let(:food3) do
       Food.create!(name: 'Egg', measurement_unit: 'units', price: 0.8)
     end
     let(:r_foods1) { RecipeFood.create!(quantity: 1, recipe_id: recipe.id, food_id: food1.id) }
