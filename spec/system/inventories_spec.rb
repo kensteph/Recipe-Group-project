@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Inventory, type: :system do
-  subject { Inventory.create(name: 'My Inventory', user_id: 1)}
+  subject { Inventory.create(name: 'My Inventory', user_id: 1) }
   before { subject.save }
 
   describe 'index page' do
@@ -84,5 +84,4 @@ RSpec.describe Inventory, type: :system do
     #   expect(page).to have_current_path("/users/#{subject.id}/posts", ignore_query: true)
     # end
   end
-  
 end
