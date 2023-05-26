@@ -34,8 +34,8 @@ RSpec.describe 'Inventories', type: :system do
 
     it 'Redirects from inventories index to inventories show Inventory 1' do
       visit '/inventories'
-      link = find_link('New inventory').click
-      expect(page).to have_current_path("/inventories/new", ignore_query: true)
+      find_link('New inventory').click
+      expect(page).to have_current_path('/inventories/new', ignore_query: true)
     end
   end
 
@@ -72,11 +72,8 @@ RSpec.describe 'Inventories', type: :system do
 
     it 'Test in the displayed inventory the presence of Add food' do
       visit "/inventories/#{inventory.id}"
-      link = find_link('Add food').click
-      expect(page).to have_current_path("/foods/new", ignore_query: true)
+      find_link('Add food').click
+      expect(page).to have_current_path('/foods/new', ignore_query: true)
     end
-
   end
-
-
 end

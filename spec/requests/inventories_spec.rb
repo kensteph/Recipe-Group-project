@@ -89,8 +89,5 @@ RSpec.describe 'Inventories', type: :request do
       get "/inventories/#{inventory.id}"
       expect(response.body).to include('Add food')
     end
-
   end
-
-
 end
