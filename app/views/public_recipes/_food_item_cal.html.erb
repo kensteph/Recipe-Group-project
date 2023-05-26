@@ -1,5 +1,5 @@
 <div>
     <% @recipes.includes(:user).each do |username|%>
-  <%= username.user.name%>
+  <%= "by: #{username.user.id}" %>
     <% end %>
     </div>
