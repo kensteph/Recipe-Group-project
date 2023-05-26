@@ -65,9 +65,7 @@ RSpec.describe 'Recipe', type: :request do
       get recipe_path(id: recipe.id)
       recipe.save
     end
-    it 'renders show template' do     
-      pp user.id
-      pp recipe.id
+    it 'renders show template' do      
       expect(response).to render_template(:show)
     end
 
