@@ -77,7 +77,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  def modal
+  def shopping
     @inventory = Inventory.find(params[:invent_id])
     @recipe = Recipe.find(params[:recipe_id])
     @inventory_foods = InventoryFood.where(inventory_id: params[:invent_id])
@@ -86,19 +86,18 @@ class RecipesController < ApplicationController
     @amount = 0
     @total_price = 0
     @recipe_foods.includes(:food).each do |item|
-      if !@inventory_foods_ids.include?(item.food_id)
-        @total_price += item.food.price * item.quantity
-        @amount += 1
-      else
+      if @inventory_foods_ids.include?(item.food_id)
         @inventory_foods.includes(:food).each do |inventory|
-          if item.food_id == inventory.food_id && item.quantity < inventory.quantity
-            @total_price += item.food.price * (inventory.quantity - item.quantity)
-            amount += 1
+          if item.food_id == inventory.food_id && item.quantity > inventory.quantity
+            @total_price += item.food.price * (item.quantity - inventory.quantity)
+            @amount += 1
           end
         end
+      else
+        @total_price += item.food.price * item.quantity
+        @amount += 1
       end
     end
-    
   end
 
   private
