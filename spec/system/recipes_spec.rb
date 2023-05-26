@@ -1,39 +1,50 @@
 require 'rails_helper'
 
-RSpec.describe 'Inventories', type: :request do
+RSpec.describe 'Recipe', type: :request do
   describe 'GET /index' do
+    let(:user) do
+      User.create!(
+        name: 'Tom',
+        email: 'test@mail.com',
+        password: '123456'
+      )
+    end
+    let(:recipe) do
+      Recipe.create!(
+        name: 'icecream',
+        preparation_time: 3,
+        cooking_time: 4,
+        description: 'ice cream made easy',
+        public: true,
+        user:
+      )
+    end
+    before(:each) do
+      get recipes_path(user_id: user.id)
+      recipe.save
+    end
+
     it 'renders index template' do
-      get '/inventories'
+      get '/recipes'
       expect(response).to render_template(:index)
     end
     it 'renders a successful response' do
-      get '/inventories'
+      get '/recipes'
       expect(response).to be_successful
     end
 
-    it 'Test if /users is loading correctly the body' do
-      get '/inventories'
-      expect(response.body).to include('Inventories')
-    end
-  end
+    it 'Test if /recipes is loading correctly the body' do
+      get '/recipes'
 
-  describe 'GET /show' do
-    it 'renders show template' do
-      inventory = Inventory.create(name: 'My Inventory', user_id: 1)
-      get "/inventories/#{inventory.id}"
-      expect(response).to render_template(:show)
+      expect(response.body).to include('Recipes')
+      expect(response.body).to include('New recipe')
+      expect(response.body).to include('icecream')
     end
 
-    it 'renders a successful response' do
-      inventory = Inventory.create(name: 'My Inventory', user_id: 1)
-      get "/inventories/#{inventory.id}"
-      expect(response).to be_successful
-    end
-
-    it 'Test if /inventories/:id is loading correctly the body' do
-      inventory = Inventory.create(name: 'My Inventory', user_id: 1)
-      get "/inventories/#{inventory.id}"
-      expect(response.body).to include('My Inventory')
+    it 'Test if /recipes has the right recipe created' do
+      get '/recipes'
+      expect(response.body).to include('ice cream made easy')
+      expect(response.body).to include('icecream')
     end
   end
 end
