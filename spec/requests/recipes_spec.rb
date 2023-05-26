@@ -1,24 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe 'Recipe', type: :request do
-  describe 'GET /index' do
-    let(:user) do
-      User.create!(
-        name: 'Tom',
-        email: 'test@mail.com',
-        password: '123456'
-      )
-    end
-    let(:recipe) do
-      Recipe.create!(
-        name: 'icecream',
-        preparation_time: 3,
-        cooking_time: 4,
-        description: 'ice cream made easy',
-        public: true,
-        user:
-      )
-    end
+  let(:user) do
+    User.create!(
+      name: 'Tom',
+      email: 'test@mail.com',
+      password: '123456'
+    )
+  end
+  let(:recipe) do
+    Recipe.create!(
+      name: 'icecream',
+      preparation_time: 3,
+      cooking_time: 4,
+      description: 'ice cream made easy',
+      public: true,
+      user_id: user.id
+    )
+  end
+  describe 'GET /index' do    
     before(:each) do
       get recipes_path(user_id: user.id)
       recipe.save
@@ -45,6 +45,52 @@ RSpec.describe 'Recipe', type: :request do
       get '/recipes'
       expect(response.body).to include('ice cream made easy')
       expect(response.body).to include('icecream')
+    end
+  end
+
+  describe 'GET /show' do
+    let(:food1) do 
+      Food.create(name: 'Apple', measurement_unit: 'kg', price: 2.5)
+    end
+    let(:food2) do 
+      Food.create(name: 'Flour', measurement_unit: 'kg', price: 1.2)
+    end
+    let (:food3) do 
+      Food.create(name: 'Egg', measurement_unit: 'units', price: 0.8)
+    end
+    let(:r_foods1) { RecipeFood.create(quantity: 1, recipe_id: recipe.id, food_id: food1.id) }
+    let(:r_foods2) { RecipeFood.create(quantity: 2, recipe_id: recipe.id, food_id: food2.id) }
+    let(:r_foods3) { RecipeFood.create(quantity: 3, recipe_id: recipe.id, food_id: food3.id) }
+    before(:each) do
+      get recipe_path(id: recipe.id)
+      recipe.save
+    end
+    it 'renders show template' do     
+      pp user.id
+      pp recipe.id
+      expect(response).to render_template(:show)
+    end
+
+    it 'renders a successful response' do      
+      expect(response).to be_successful
+    end
+
+    it 'Test if is loading correctly the body' do      
+      expect(response.body).to include('icecream')
+      expect(response.body).to include('Public')      
+    end
+  
+    it 'renders the recipe foods' do
+      recipe_foods = [
+        instance_double('RecipeFood', food: instance_double('Food', name: 'Apple', measurement_unit: 'kg', price: 1.99), quantity: 2),
+        instance_double('RecipeFood', food: instance_double('Food', name: 'Flour', measurement_unit: 'cup', price: 0.99), quantity: 1),
+        instance_double('RecipeFood', food: instance_double('Food', name: 'Egg', measurement_unit: 'piece', price: 0.25), quantity: 4)
+      ]
+      controller.instance_variable_set(:@recipe_foods, recipe_foods)
+      
+      expect(response).to render_template(partial: 'recipe_foods', locals: { recipe_foods: recipe_foods })  
+      expect(response.body).to have_content('Apple')
+      
     end
   end
 end
