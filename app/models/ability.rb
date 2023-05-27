@@ -10,6 +10,10 @@ class Ability
       recipe.user == user
     end
 
+    can :destroy, Food do |food|
+      food.user == user
+    end
+
     can :destroy, Inventory do |inventory|
       inventory.user == user
     end
