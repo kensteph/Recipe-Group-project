@@ -9,8 +9,8 @@
   <thead>
     <tr>
       <th scope="col">Food</th>
-      <th scope="col">Measurment</th>
-      <th scope="col">Price</th>
+      <th scope="col">Measurment unit</th>
+      <th scope="col">Unit price</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -22,7 +22,7 @@
       <td><%= "$ #{food.price}"%></td>
       <% if can? :destroy, food %>
         <td>
-          <%= link_to "Remove", food_path(food), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
+          <%= link_to "Delete", food_path(food), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
         </td>
         <% else %>
         <td></td>
