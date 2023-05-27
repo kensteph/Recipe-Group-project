@@ -50,13 +50,13 @@ RSpec.describe 'Recipe', type: :request do
 
   describe 'GET /show' do
     let(:food1) do
-      Food.create(name: 'Apple', measurement_unit: 'kg', price: 2.5)
+      Food.create(name: 'Apple', measurement_unit: 'kg', price: 2.5, user_id: user)
     end
     let(:food2) do
-      Food.create(name: 'Flour', measurement_unit: 'kg', price: 1.2)
+      Food.create(name: 'Flour', measurement_unit: 'kg', price: 1.2, user_id: user)
     end
     let(:food3) do
-      Food.create(name: 'Egg', measurement_unit: 'units', price: 0.8)
+      Food.create(name: 'Egg', measurement_unit: 'units', price: 0.8, user_id: user)
     end
     let(:r_foods1) { RecipeFood.create(quantity: 1, recipe_id: recipe.id, food_id: food1.id) }
     let(:r_foods2) { RecipeFood.create(quantity: 2, recipe_id: recipe.id, food_id: food2.id) }
