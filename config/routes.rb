@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :inventories, only: [:index, :show, :new, :create, :destroy]
   resources :inventory_foods, only: [:create,:destroy]
-  resources :foods, only: [:new, :create, :destroy]
+  resources :foods, only: [:index,:new, :create, :destroy]
   resources :recipes, only: [:index, :show, :new, :create, :destroy]
   resources :users, only: [:index, :show]
   resources :public_recipes, only: [:index]
@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "inventories#index"
+  root "foods#index"
 end

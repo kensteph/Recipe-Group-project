@@ -7,15 +7,15 @@ RSpec.describe 'Shopping list', type: :request do
     end
 
     let(:food1) do
-      Food.create!(name: 'Apple', measurement_unit: 'kg', price: 2.5)
+      Food.create!(name: 'Apple', measurement_unit: 'kg', price: 2.5, user_id: tom.id)
     end
 
     let(:food2) do
-      Food.create!(name: 'Flour', measurement_unit: 'kg', price: 1.2)
+      Food.create!(name: 'Flour', measurement_unit: 'kg', price: 1.2, user_id: tom.id)
     end
 
     let(:food3) do
-      Food.create!(name: 'Egg', measurement_unit: 'units', price: 0.8)
+      Food.create!(name: 'Egg', measurement_unit: 'units', price: 0.8, user_id: tom.id)
     end
 
     let(:recipe1) do

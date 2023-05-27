@@ -56,18 +56,19 @@ RSpec.describe 'Recipe', type: :system do
       )
     end
     let(:food1) do
-      Food.create!(name: 'Apple', measurement_unit: 'kg', price: 2.5)
+      Food.create!(name: 'Apple', measurement_unit: 'kg', price: 2.5, user_id: user.id)
     end
     let(:food2) do
-      Food.create!(name: 'Flour', measurement_unit: 'kg', price: 1.2)
+      Food.create!(name: 'Flour', measurement_unit: 'kg', price: 1.2, user_id: user.id)
     end
     let(:food3) do
-      Food.create!(name: 'Egg', measurement_unit: 'units', price: 0.8)
+      Food.create!(name: 'Egg', measurement_unit: 'units', price: 0.8, user_id: user.id)
     end
     let(:r_foods1) { RecipeFood.create!(quantity: 1, recipe_id: recipe.id, food_id: food1.id) }
     let(:r_foods2) { RecipeFood.create!(quantity: 2, recipe_id: recipe.id, food_id: food2.id) }
     let(:r_foods3) { RecipeFood.create!(quantity: 3, recipe_id: recipe.id, food_id: food3.id) }
     before(:each) do
+      user.save
       recipe.save
       food1.save
       food2.save
@@ -75,6 +76,7 @@ RSpec.describe 'Recipe', type: :system do
       r_foods1.save
       r_foods2.save
       r_foods3.save
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     end
     it "Should display the food's name." do
       visit "recipes/#{recipe.id}"
