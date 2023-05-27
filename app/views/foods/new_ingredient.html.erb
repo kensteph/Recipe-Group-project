@@ -1,0 +1,37 @@
+<%= button_to 'Back', recipe_path(id: @recipe.id), method: :get, class: 'btn btn-warning m-2' %>
+<div class="d-flex justify-content-between">
+  <h1>Add ingredient</h1>
+  <%= button_to 'Add new food', new_food_path, method: :get, class:'btn btn-success' %>
+</div>
+<% if @available.length > 0 %>
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th class="table-info">Name</th>      
+        <th class="table-info">Measurement unit</th>
+        <th class="table-info">Value</th>
+        <th class="table-info">Quantity</th>
+      </tr>
+    </thead>  
+    <tbody>
+      <% @available.each do |item|%>
+      <tr>
+        <td><%= item.name%></td>
+        <td><%=item.measurement_unit%> </td>      
+        <td><%= item.price%></td>
+        <td>
+          <%= form_with(model: RecipeFood.new) do |form| %>
+            <%= form.number_field :quantity, min: 1 %>
+            <%= form.hidden_field :recipe_id, value: @recipe.id %>
+            <%= form.hidden_field :food_id, value: item.id %>
+            <%= form.submit 'Add Ingredient', class:'btn btn-success ms-2'%>
+          <% end %>       
+        </td>
+          
+      </tr>
+      <% end %>
+    </tbody>
+  </table>  
+<% end %>
+
+

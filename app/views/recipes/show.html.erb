@@ -1,0 +1,67 @@
+<p style="color: green"><%= notice %></p>
+<%= button_to 'Back', recipes_path, method: :get, class: 'btn btn-warning m-2' %>
+
+
+  
+<div class="d-flex justify-content-center fs-1 mb-5">
+  <h2><%= @recipe.name %></h2>  
+</div>
+<div class="d-flex justify-content-between m-5">
+  <div>
+    <h3 class="mb-3">Preparation time: <%= @recipe.preparation_time %></h3>
+    <h3 class="mb-3">Cooking time: <%= @recipe.cooking_time %></h3>
+    <h3 class="mb-3">Description: <%= @recipe.description %></h3>    
+  </div>
+  <%= form_tag checkbox_path, method: :put, id: 'my-form' do %>
+  <div class="form-check form-switch fs-2">
+    <%= label_tag 'flexSwitchCheckChecked', 'Public', class: 'form-check-label' %>
+    <%= check_box_tag 'public', '1', @recipe.public, class: 'form-check-input', id: 'flexSwitchCheckChecked' %>  
+  </div>
+  <% end %>
+</div>
+
+<div class="d-flex justify-content-between mb-5">
+  <button type="button" class="btn btn-success ms-5" data-bs-toggle="modal" data-bs-target="#myModal">
+    Generate shopping list
+  </button>
+  <%if @current_user==@recipe.user%>
+    <%= button_to 'Add ingredient', add_ingredient_path(@recipe.id), method: :get, class: 'btn btn-success me-5' %>
+  <% end %>
+</div>
+
+
+<div class="d-flex justify-content-start ms-5">
+  <% if @recipe.public || @current_user==@recipe.user %>
+  <%= render 'ingredients' %>
+  <% end %>
+</div>
+
+<!-- Modal to select inventory-->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Shopping List</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <%= form_tag shopping_list_path(recipe_id: @recipe.id, inventory_id: :invent_id), method: :get, id: 'modal-form' do %>
+          <%= label_tag :invent_id, 'Inventories' %>
+          <%= select_tag :invent_id, options_for_select(@inventories.map { |inventory| [inventory.name, inventory.id] }), class: 'form-select' %>
+          <%= submit_tag 'Generate', class: 'btn btn-success mt-3' %>
+        <% end %>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="container align-items-center">
+<% if user_signed_in? %>
+<div class="d-flex flex-row justify-content-end p-2 mb-3 mt-3">
+<%= link_to "New food", new_food_path , class:"btn btn-success" %>
+</div>
+<div id="foods">
+<!-- The inventory table -->
+<table class="table table-bordered mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Measurment unit</th>
+      <th scope="col">Unit price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+   <tbody >
+  <% @foods.each  do |food| %>
+    <tr>
+      <td><%= food.name%></td>
+      <td><%= food.measurement_unit%></td>
+      <td><%= "$ #{food.price}"%></td>
+      <% if can? :destroy, food %>
+        <td>
+          <%= link_to "Delete", food_path(food), class:"btn btn-danger btn-sm", 'data-turbo-method': :delete %>
+        </td>
+        <% else %>
+        <td></td>
+      <% end%>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+<div>
+
+<% else %>
+<div class="alert alert-danger" role="alert">
+    You have to sign in to display the foods list.
+    <%= link_to "Sign In", new_user_session_path , class: "fs-4 text-decoration-none"%>
+  </div>
+ <% end %>
+</div>
+
+</div>
